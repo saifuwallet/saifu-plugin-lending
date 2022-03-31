@@ -1,0 +1,6 @@
+{
+  "id": "saifu-plugin-lending",
+  "name": "Lending",
+  "description": "Plugin to view your Solend Obligations",
+  "version": "1.0.0"
+}
