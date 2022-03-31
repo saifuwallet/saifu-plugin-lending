@@ -31,7 +31,7 @@ export default {
       minimize: true,
       plugins: [
         new tailwindcss({
-          content: ['./*/**.{js,jsx,ts,tsx}'],
+          content: ['./src/*/**.{js,jsx,ts,tsx}'],
           theme: {
             extend: {},
           },
@@ -55,7 +55,7 @@ export default {
       declaration: !isProd,
     }),
     copy({
-      targets: [{ src: './manifest.json', dest: './dist' }],
+      targets: [{ src: './metadata.json', dest: './dist' }],
     }),
   ],
 };
