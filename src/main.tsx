@@ -23,7 +23,7 @@ class LendingPlugin extends Plugin {
       id: 'overview',
       title: 'Lending',
       component: Solend,
-      icon: <SolendIcon className="h-5 w-5" variant="white" />,
+      icon: <SolendIcon className="h-5 w-5" />,
     });
   }
 }
