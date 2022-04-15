@@ -219,16 +219,6 @@
     estree-walker "^1.0.1"
     picomatch "^2.2.2"
 
-"@saifuwallet/saifu@^0.1.4":
-  version "0.1.4"
-  resolved "https://npm.pkg.github.com/download/@saifuwallet/saifu/0.1.4/c2603d7c508eff18b59b2eb627ab1ec3c8bfca173478fb385951ac5417de5b61#48c0e403211538b3b159c724c57a0cffadb9da16"
-  integrity sha512-XvzvFf9Lf9pvNan8OWfVyYrm3aojrGk9mvZm4a65mNGTMqP7BrykYaE9KXHDNLDC7Aw2vBqjGX7VkDEmS2Ywkg==
-  dependencies:
-    "@solana/spl-token-registry" "^0.2.2911"
-    "@solana/web3.js" "^1.35.1"
-    "@types/react" "^17.0.2"
-    react-query "^3.34.16"
-
 "@solana/buffer-layout@^3.0.0":
   version "3.0.0"
   resolved "https://registry.npmjs.org/@solana/buffer-layout/-/buffer-layout-3.0.0.tgz"
@@ -3747,6 +3737,16 @@ safer-buffer@^2.1.0:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
+
+saifu@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/saifu/-/saifu-0.2.0.tgz#90886d016c9cf2a7ec8519b745ef3d1587f4d258"
+  integrity sha512-1Su/ftiFrWxKRaiqLkB21g4mxniay5/eMBb6tog6iClMpKiuucrQY+VeDsoV7uvNGX+b/2wGd77bF3Ysp4SzhA==
+  dependencies:
+    "@solana/spl-token-registry" "^0.2.2911"
+    "@solana/web3.js" "^1.35.1"
+    "@types/react" "^17.0.2"
+    react-query "^3.34.16"
 
 secp256k1@^4.0.2:
   version "4.0.3"
