@@ -1,5 +1,5 @@
 {
-  "id": "saifu-plugin-lending",
+  "id": "saifu-plugin-lending-tester",
   "name": "Lending",
   "description": "Plugin to view your lending obligations",
   "version": "1.0.3"
