@@ -1,12 +1,9 @@
-import { FunctionComponent } from 'react';
-import { Plugin, ViewProps } from 'saifu';
-
-import SolendIcon from '@/components/SolendIcon';
+import { Plugin } from 'saifu';
 
 import DepositList from './components/DepositList';
 import SummaryCard from './components/SummaryCard';
 
-const Solend: FunctionComponent<ViewProps> = () => {
+const Solend = () => {
   return (
     <div className="space-y-4">
       <SummaryCard />
@@ -23,7 +20,13 @@ class LendingPlugin extends Plugin {
       id: 'overview',
       title: 'Lending',
       component: Solend,
-      icon: <SolendIcon className="h-5 w-5" />,
+      icon: (
+        <img
+          src="https://solend.fi/assets/tokens/slnd.png"
+          alt="solend"
+          className="h-5 w-5 m-auto"
+        />
+      ),
     });
   }
 }
