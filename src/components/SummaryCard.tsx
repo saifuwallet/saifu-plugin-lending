@@ -1,15 +1,14 @@
+import { Card, Spinner, Text } from '@saifuwallet/saifu-ui';
+
 import useObligation from '@/hooks/useObligation';
 import useSolend from '@/hooks/useSolend';
 import { displayUSD, displayPercentage } from '@/lib/number';
-
-import Card from './Card';
-import Spinner from './Spinner';
 
 export default function SummaryCard() {
   const solend = useSolend();
   const obligation = useObligation();
   return (
-    <Card className="space-y-2" variant="highlight" size="md">
+    <Card className="space-y-2 p-4">
       <div>
         <p className="font-bold">Net Assets</p>
         <p className="text-2xl font-extrabold">
@@ -28,36 +27,56 @@ export default function SummaryCard() {
 const ObligationInfoTable = () => {
   const obligation = useObligation();
   return (
-    <table className="table-auto w-full">
+    <table className="table-auto w-full p-4">
       <tbody>
         <tr>
-          <td className="text-orange-200">Deposit Balance</td>
-          <td className="text-right font-semibold">
-            {displayUSD(obligation.data?.obligationStats.userTotalDeposit)}
+          <td>
+            <Text size="sm">Deposit Balance</Text>
+          </td>
+          <td className="text-right">
+            <Text size="sm" weight="semibold">
+              {displayUSD(obligation.data?.obligationStats.userTotalDeposit)}
+            </Text>
           </td>
         </tr>
         <tr>
-          <td className="text-orange-200">Borrow Balance</td>
-          <td className="text-right font-semibold">
-            {displayUSD(obligation.data?.obligationStats.userTotalBorrow)}
+          <td>
+            <Text size="sm">Borrow Balance</Text>
+          </td>
+          <td className="text-right">
+            <Text size="sm" weight="semibold">
+              {displayUSD(obligation.data?.obligationStats.userTotalBorrow)}
+            </Text>
           </td>
         </tr>
         <tr>
-          <td className="text-orange-200">Utilization</td>
-          <td className="text-right font-semibold">
-            {displayPercentage(obligation.data?.obligationStats.borrowUtilization)}
+          <td>
+            <Text size="sm">Utilization</Text>
+          </td>
+          <td className="text-right">
+            <Text size="sm" weight="semibold">
+              {displayPercentage(obligation.data?.obligationStats.borrowUtilization)}
+            </Text>
           </td>
         </tr>
         <tr>
-          <td className="text-orange-200">Borrow Limit</td>
-          <td className="text-right font-semibold">
-            {displayUSD(obligation.data?.obligationStats.borrowLimit)}
+          <td>
+            <Text size="sm">Borrow Limit</Text>
+          </td>
+          <td className="text-right">
+            <Text size="sm" weight="semibold">
+              {displayUSD(obligation.data?.obligationStats.borrowLimit)}
+            </Text>
           </td>
         </tr>
         <tr>
-          <td className="text-orange-200">Liquidation Threshold</td>
-          <td className="text-right font-semibold">
-            {displayUSD(obligation.data?.obligationStats.liquidationThreshold)}
+          <td>
+            <Text size="sm">Liquidation Threshold</Text>
+          </td>
+          <td className="text-right">
+            <Text size="sm" weight="semibold">
+              {displayUSD(obligation.data?.obligationStats.liquidationThreshold)}
+            </Text>
           </td>
         </tr>
       </tbody>

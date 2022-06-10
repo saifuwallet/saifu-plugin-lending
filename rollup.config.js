@@ -8,6 +8,7 @@ import builtins from 'rollup-plugin-node-builtins';
 import globals from 'rollup-plugin-node-globals';
 import typescript from '@rollup/plugin-typescript';
 import copy from 'rollup-plugin-copy';
+import colors from 'tailwindcss/colors'
 
 const env = process.env.NODE_ENV || 'development';
 const isProd = env === 'production';
@@ -20,7 +21,7 @@ export default {
     format: 'system',
     exports: 'default',
   },
-  external: ['saifu', 'react', 'react-dom', '@babel/runtime/helpers/interopRequireDefault'],
+  external: ['saifu','@saifuwallet/saifu-ui', 'react', 'react-dom', '@babel/runtime/helpers/interopRequireDefault'],
   plugins: [
     commonjs({}),
     globals(),
@@ -31,14 +32,31 @@ export default {
       minimize: true,
       plugins: [
         new tailwindcss({
-          content: ['./src/*/**.{js,jsx,ts,tsx}'],
-          theme: {
-            extend: {},
-          },
-          variants: {},
-          plugins: [],
           corePlugins: {
-            preflight: false,
+            preflight: false
+          },
+          darkMode: 'class',
+          content: ['./src/**/*.{js,jsx,ts,tsx}', './node_modules/@saifuwallet/saifu-ui/dist/**/*.js'],
+          theme: {
+            screen: {
+              // change small to extension width
+              sm: '350px',
+              md: '768px',
+              // => @media (min-width: 768px) { ... }
+        
+              lg: '1024px',
+              // => @media (min-width: 1024px) { ... }
+        
+              xl: '1280px',
+              // => @media (min-width: 1280px) { ... }
+        
+              '2xl': '1536px',
+            },
+            extend: {
+              colors: {
+                orange: colors.orange,
+              },
+            },
           },
         }),
         new autoprefixer(),

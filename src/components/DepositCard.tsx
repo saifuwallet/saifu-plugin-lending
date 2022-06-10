@@ -1,12 +1,10 @@
+import { Box, Text, TokenLogo } from '@saifuwallet/saifu-ui';
 import { Position } from '@solendprotocol/solend-sdk';
 import { useMemo } from 'react';
 import { useTokenInfos, usePrice } from 'saifu';
 
 import useSolend from '@/hooks/useSolend';
 import { displayPercentage, lamportsToSol, lamportsToUSD } from '@/lib/number';
-
-import Card from './Card';
-import TokenLogo from './TokenLogo';
 
 export default function DepositCard({ position }: { position: Position }) {
   const tokenInfos = useTokenInfos();
@@ -26,22 +24,44 @@ export default function DepositCard({ position }: { position: Position }) {
 
   const price = usePrice(tokenInfo);
   return (
-    <Card className="flex space-x-2">
-      <div className="flex-none">
-        <TokenLogo url={tokenInfo?.logoURI} alt={position.mintAddress} />
+    <Box
+      className="bg-white bg-origin-content"
+      start={<TokenLogo size="sm" className="my-auto mr-4" url={tokenInfo?.logoURI} />}
+    >
+      <div className="flex leading-5">
+        <div className="grow">
+          <div>
+            <Text weight="semibold">{tokenInfo?.symbol}</Text>
+          </div>
+          <div>
+            <Text
+              size="sm"
+              variant="secondary"
+              placeholderCharLength={10}
+              isLoading={solend.isLoading}
+            >
+              {lamportsToSol(position.amount.toNumber(), tokenInfo?.decimals)}
+            </Text>
+          </div>
+        </div>
+        <div className="flex-none text-right">
+          <div>
+            <Text isLoading={price.isLoading} weight="medium" placeholderCharLength={10}>
+              {lamportsToUSD(position.amount.toNumber(), price.data || 0, tokenInfo?.decimals)}
+            </Text>
+          </div>
+          <div>
+            <Text
+              variant="secondary"
+              size="sm"
+              isLoading={price.isLoading}
+              placeholderCharLength={10}
+            >
+              {displayPercentage(supplyAPY)}
+            </Text>
+          </div>
+        </div>
       </div>
-      <div className="flex-grow text-left">
-        <p className="font-bold">{tokenInfo?.symbol} </p>
-        <p className="font-bold text-gray-400">{displayPercentage(supplyAPY)}</p>
-      </div>
-      <div className="flex-none text-right">
-        <p className="font-bold">
-          {lamportsToSol(position.amount.toNumber(), tokenInfo?.decimals)}
-        </p>
-        <p className="">
-          {lamportsToUSD(position.amount.toNumber(), price.data || 0, tokenInfo?.decimals)}
-        </p>
-      </div>
-    </Card>
+    </Box>
   );
 }
