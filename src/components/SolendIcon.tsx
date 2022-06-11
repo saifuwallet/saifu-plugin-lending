@@ -6,68 +6,31 @@ const SolendIcon = ({ className }: SolendIconProps) => {
   return (
     <svg
       className={className}
-      width="68px"
-      height="54px"
-      viewBox="0 0 685 544"
-      version="1.1"
+      width="24"
+      height="20"
+      viewBox="0 0 24 20"
+      fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
+      <path
+        d="M5.31107 2.37903L3.30732 4.48199C1.43142 6.45076 1.45088 9.59694 3.35099 11.5413C5.24431 13.4787 8.30555 13.5063 10.232 11.6034L13.0403 8.82957C15.0819 6.81308 18.3216 6.82742 20.3458 8.86193C22.5456 11.0727 22.4118 14.74 20.057 16.7767L18.6426 18M6.96889 8.03368C6.96889 8.03368 10.2154 4.07542 13.7383 3.08586M16.4506 12.9983C16.4506 12.9983 13.2061 16.9686 9.66692 17.8952"
+        stroke="#FF9351"
+        strokeWidth="2.89801"
+        strokeLinecap="round"
+      />
       <defs>
-        <linearGradient x1="0%" y1="34.5788572%" x2="82.1157674%" y2="50%" id="linearGradient-1">
-          <stop stopColor="#FF9351" offset="0%"></stop>
-          <stop stopColor="#FF5C28" offset="100%"></stop>
-        </linearGradient>
         <linearGradient
-          x1="0%"
-          y1="68.0571047%"
-          x2="106.816737%"
-          y2="32.78967%"
-          id="linearGradient-2"
+          id="paint0_linear_4_20"
+          x1="9.66692"
+          y1="16.3092"
+          x2="16.337"
+          y2="13.3335"
+          gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#FF9351" offset="0%"></stop>
-          <stop stopColor="#FF5C28" offset="100%"></stop>
-        </linearGradient>
-        <linearGradient
-          x1="0%"
-          y1="67.612691%"
-          x2="106.816737%"
-          y2="33.2132432%"
-          id="linearGradient-3"
-        >
-          <stop stopColor="#FF9351" offset="0%"></stop>
-          <stop stopColor="#FF5C28" offset="100%"></stop>
+          <stop stopColor="#FF9351" />
+          <stop offset="1" stopColor="#FF5C28" />
         </linearGradient>
       </defs>
-      <g
-        id="Page-1"
-        stroke="none"
-        strokeWidth="1"
-        fill="none"
-        fillRule="evenodd"
-        strokeLinecap="round"
-      >
-        <g id="1280" transform="translate(-298.000000, -369.000000)" strokeWidth="84.8287395">
-          <g id="sendlend-logo-vector" transform="translate(340.000000, 412.000000)">
-            <g id="Group-10" transform="translate(0.425185, 0.379039)">
-              <path
-                d="M102.2674,0 L42.2498355,61.5565019 C-13.9382683,119.185364 -13.3554032,211.278242 43.557735,268.191331 L43.557735,268.191331 C100.267866,324.901461 191.960245,325.711325 249.663493,270.011553 L333.779907,188.81636 C394.928522,129.790927 491.96728,130.210637 552.598646,189.763664 L552.598646,189.763664 C618.486241,254.474888 614.48126,361.823638 543.948282,421.43972 L501.583174,457.247596"
-                id="Path"
-                stroke="url(#linearGradient-1)"
-              ></path>
-              <path
-                d="M151.92374,165.519492 C151.92374,165.519492 249.166442,49.6558475 354.685118,20.6899365"
-                id="Path"
-                stroke="url(#linearGradient-2)"
-              ></path>
-              <path
-                d="M435.927109,310.839694 C435.927109,310.839694 338.744999,427.058023 232.736662,454.178588"
-                id="Path"
-                stroke="url(#linearGradient-3)"
-              ></path>
-            </g>
-          </g>
-        </g>
-      </g>
     </svg>
   );
 };
