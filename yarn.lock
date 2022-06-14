@@ -236,10 +236,10 @@
     estree-walker "^1.0.1"
     picomatch "^2.2.2"
 
-"@saifuwallet/saifu-ui@^0.1.0-beta6":
-  version "0.1.0-beta6"
-  resolved "https://npm.pkg.github.com/download/@saifuwallet/saifu-ui/0.1.0-beta6/c3df303c98876bb65b2bff35be57cfd83bdc8a9e077c90bfec6228ab4bda7bca#1603c3570dba14a42949081af5450224181d62ed"
-  integrity sha512-BPqSL5apDiCZMJG1wXhDJLZ/bjmpRJIsTN4qpnj+nECo2ZhUzAaMugtgs16glOSLnsK3y0wG+1kpsqjaVhiAzQ==
+"@saifuwallet/saifu-ui@^0.1.0-beta7":
+  version "0.1.0-beta7"
+  resolved "https://npm.pkg.github.com/download/@saifuwallet/saifu-ui/0.1.0-beta7/8d0892adc8b0adc509bfbdd3f0c5f38ddbad01508583eb8d5708626046a034a9#c365c224244fc01ed1b094fd0d284af484c75b0f"
+  integrity sha512-GvWzazIw9FgiFMDwznqoa5bJWYGCUrHUmt+Pm6YBGKAIdiRuhjTGlgDRg2ejD0irP3omKRFLcJ85l670N0K7fg==
   dependencies:
     "@headlessui/react" "^1.6.0"
     "@heroicons/react" "^1.0.6"

@@ -1,23 +1,21 @@
-import { Card, Spinner, Text } from '@saifuwallet/saifu-ui';
+import { Card, Text } from '@saifuwallet/saifu-ui';
 
 import useObligation from '@/hooks/useObligation';
-import useSolend from '@/hooks/useSolend';
 import { displayUSD, displayPercentage } from '@/lib/number';
 
 export default function SummaryCard() {
-  const solend = useSolend();
   const obligation = useObligation();
   return (
     <Card className="space-y-2 p-4">
       <div>
-        <p className="font-bold">Net Assets</p>
-        <p className="text-2xl font-extrabold">
-          {obligation.isLoading || solend.isLoading ? (
-            <Spinner />
-          ) : (
-            `${displayUSD(obligation.data?.obligationStats?.netAccountValue)}`
-          )}
-        </p>
+        <Text as="p" weight="bold">
+          Net Assets
+        </Text>
+        <div>
+          <Text isLoading={obligation.isLoading || obligation.isIdle} size="2xl" weight="bold">
+            {displayUSD(obligation.data?.obligationStats?.netAccountValue)}
+          </Text>
+        </div>
       </div>
       <ObligationInfoTable />
     </Card>
@@ -34,7 +32,7 @@ const ObligationInfoTable = () => {
             <Text size="sm">Deposit Balance</Text>
           </td>
           <td className="text-right">
-            <Text size="sm" weight="semibold">
+            <Text isLoading={obligation.isLoading || obligation.isIdle} size="sm" weight="semibold">
               {displayUSD(obligation.data?.obligationStats.userTotalDeposit)}
             </Text>
           </td>
@@ -44,7 +42,7 @@ const ObligationInfoTable = () => {
             <Text size="sm">Borrow Balance</Text>
           </td>
           <td className="text-right">
-            <Text size="sm" weight="semibold">
+            <Text isLoading={obligation.isLoading || obligation.isIdle} size="sm" weight="semibold">
               {displayUSD(obligation.data?.obligationStats.userTotalBorrow)}
             </Text>
           </td>
@@ -54,7 +52,7 @@ const ObligationInfoTable = () => {
             <Text size="sm">Utilization</Text>
           </td>
           <td className="text-right">
-            <Text size="sm" weight="semibold">
+            <Text size="sm" isLoading={obligation.isLoading || obligation.isIdle} weight="semibold">
               {displayPercentage(obligation.data?.obligationStats.borrowUtilization)}
             </Text>
           </td>
@@ -64,7 +62,7 @@ const ObligationInfoTable = () => {
             <Text size="sm">Borrow Limit</Text>
           </td>
           <td className="text-right">
-            <Text size="sm" weight="semibold">
+            <Text size="sm" isLoading={obligation.isLoading || obligation.isIdle} weight="semibold">
               {displayUSD(obligation.data?.obligationStats.borrowLimit)}
             </Text>
           </td>
@@ -74,7 +72,7 @@ const ObligationInfoTable = () => {
             <Text size="sm">Liquidation Threshold</Text>
           </td>
           <td className="text-right">
-            <Text size="sm" weight="semibold">
+            <Text size="sm" isLoading={obligation.isLoading || obligation.isIdle} weight="semibold">
               {displayUSD(obligation.data?.obligationStats.liquidationThreshold)}
             </Text>
           </td>

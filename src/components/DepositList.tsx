@@ -1,4 +1,4 @@
-import { Card, Spinner } from '@saifuwallet/saifu-ui';
+import { Card } from '@saifuwallet/saifu-ui';
 
 import useObligation from '@/hooks/useObligation';
 
@@ -9,8 +9,12 @@ export default function DepositList() {
   return (
     <Card>
       <div className="overflow-hidden rounded-lg">
-        {obligation.isLoading ? (
-          <Spinner />
+        {obligation.isLoading || obligation.isIdle ? (
+          <>
+            <DepositCard skeleton />
+            <DepositCard skeleton />
+            <DepositCard skeleton />
+          </>
         ) : (
           obligation.data?.deposits?.map((deposit, i) => <DepositCard key={i} position={deposit} />)
         )}
