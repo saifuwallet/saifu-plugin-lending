@@ -52,7 +52,7 @@ class LendingPlugin extends Plugin implements EarnProvider {
       await this.markets.loadRewards();
     }
 
-    const m = mint === 'sol' ? '"So11111111111111111111111111111111111111112"' : mint;
+    const m = mint === 'sol' ? 'So11111111111111111111111111111111111111112' : mint;
 
     const reserve = this.markets?.reserves.find((res) => res.config.mintAddress === m);
 
@@ -62,7 +62,7 @@ class LendingPlugin extends Plugin implements EarnProvider {
 
     return [
       {
-        title: `Solend ${reserve?.config.symbol} pool`,
+        title: `Solend ${reserve?.config.name}`,
         mint: mint,
         rate: (reserve?.totalSupplyAPY().totalAPY ?? 0) * 100 * 100,
       },
