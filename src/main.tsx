@@ -1,4 +1,5 @@
-import { Plugin } from 'saifu';
+import { SolendMarket } from '@solendprotocol/solend-sdk';
+import { AppContext, EarnProvider, Plugin } from 'saifu';
 
 import SolendIcon from '@/components/SolendIcon';
 
@@ -14,8 +15,9 @@ const Solend = () => {
   );
 };
 
-class LendingPlugin extends Plugin {
+class LendingPlugin extends Plugin implements EarnProvider {
   id = 'lending';
+  markets: SolendMarket | undefined;
 
   async onload(): Promise<void> {
     this.addView({
@@ -24,6 +26,47 @@ class LendingPlugin extends Plugin {
       component: Solend,
       icon: <SolendIcon className="h-5 w-5" />,
     });
+  }
+
+  async getOpportunities(ctx: AppContext) {
+    if (!this.markets) {
+      this.markets = await SolendMarket.initialize(ctx.connection);
+      await this.markets.loadRewards();
+    }
+
+    const opportunities = this.markets?.reserves.map((reserve) => ({
+      title: `Solend ${reserve.config.symbol} pool`,
+      mint:
+        reserve.config.mintAddress === 'So11111111111111111111111111111111111111112'
+          ? 'sol'
+          : reserve.config.mintAddress,
+      rate: (reserve?.totalSupplyAPY().totalAPY ?? 0) * 100 * 100,
+    }));
+
+    return opportunities ?? [];
+  }
+
+  async getOpportunitiesForMint(ctx: AppContext, mint: string) {
+    if (!this.markets) {
+      this.markets = await SolendMarket.initialize(ctx.connection);
+      await this.markets.loadRewards();
+    }
+
+    const m = mint === 'sol' ? '"So11111111111111111111111111111111111111112"' : mint;
+
+    const reserve = this.markets?.reserves.find((res) => res.config.mintAddress === m);
+
+    if (!reserve) {
+      return [];
+    }
+
+    return [
+      {
+        title: `Solend ${reserve?.config.symbol} pool`,
+        mint: mint,
+        rate: (reserve?.totalSupplyAPY().totalAPY ?? 0) * 100 * 100,
+      },
+    ];
   }
 }
 
