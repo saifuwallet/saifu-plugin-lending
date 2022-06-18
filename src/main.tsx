@@ -35,7 +35,7 @@ class LendingPlugin extends Plugin implements EarnProvider {
     }
 
     const opportunities = this.markets?.reserves.map((reserve) => ({
-      title: `Solend ${reserve.config.symbol} pool`,
+      title: `Solend ${reserve.config.name}`,
       mint:
         reserve.config.mintAddress === 'So11111111111111111111111111111111111111112'
           ? 'sol'
