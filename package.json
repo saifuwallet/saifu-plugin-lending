@@ -1,6 +1,6 @@
 {
   "name": "@saifuwallet/saifu-plugin-lending",
-  "version": "1.0.9",
+  "version": "1.1.0-dev",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": "git@github.com:saifuwallet/saifu-plugin-lending.git",
@@ -60,7 +60,8 @@
     "dev": "rollup --config rollup.config.js -w",
     "build": "NODE_ENV=production rollup --config rollup.config.js",
     "lint": "eslint --fix --ext .js,.ts,.tsx ./src --ignore-path .gitignore",
-    "check-types": "tsc --project tsconfig.json --pretty --noEmit"
+    "check-types": "tsc --project tsconfig.json --pretty --noEmit",
+    "prepublish": "rm -rf dist/ && yarn build"
   },
   "browserslist": [
     ">0.2%",
