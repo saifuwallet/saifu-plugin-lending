@@ -1,5 +1,5 @@
 import { SolendMarket } from '@solendprotocol/solend-sdk';
-import { AppContext, EarnProvider, Plugin } from 'saifu';
+import { AppContext, EarnProvider, Opportunity, Plugin } from 'saifu';
 
 import SolendIcon from '@/components/SolendIcon';
 
@@ -35,6 +35,7 @@ class LendingPlugin extends Plugin implements EarnProvider {
     }
 
     const opportunities = this.markets?.reserves.map((reserve) => ({
+      id: reserve.config.address,
       title: `Solend ${reserve.config.name}`,
       mint:
         reserve.config.mintAddress === 'So11111111111111111111111111111111111111112'
@@ -60,13 +61,40 @@ class LendingPlugin extends Plugin implements EarnProvider {
       return [];
     }
 
+    await reserve.load();
+
     return [
       {
+        id: reserve?.config.address,
         title: `Solend ${reserve?.config.name}`,
         mint: mint,
         rate: (reserve?.totalSupplyAPY().totalAPY ?? 0) * 100 * 100,
       },
     ];
+  }
+
+  async getOpportunityBalance(ctx: AppContext, opportunity: Opportunity) {
+    if (!this.markets) {
+      this.markets = await SolendMarket.initialize(ctx.connection);
+      await this.markets.loadRewards();
+    }
+
+    if (ctx.publicKey) {
+      const m =
+        opportunity.mint === 'sol'
+          ? 'So11111111111111111111111111111111111111112'
+          : opportunity.mint;
+
+      const obligations = await this.markets.fetchObligationByWallet(ctx.publicKey);
+
+      const foundDeposit = obligations?.deposits.find((deposit) => deposit.mintAddress === m);
+
+      if (foundDeposit) {
+        return foundDeposit.amount.toNumber();
+      }
+    }
+
+    return 0;
   }
 }
 
