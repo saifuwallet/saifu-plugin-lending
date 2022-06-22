@@ -1,6 +1,6 @@
 {
   "name": "@saifuwallet/saifu-plugin-lending",
-  "version": "1.1.0-dev2",
+  "version": "1.1.0-dev3",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": "git@github.com:saifuwallet/saifu-plugin-lending.git",
