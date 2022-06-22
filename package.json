@@ -9,6 +9,9 @@
   "resolutions": {
     "axios": "^0.21.1"
   },
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com"
+  },
   "devDependencies": {
     "@heroicons/react": "^1.0.5",
     "@rollup/plugin-babel": "^5.3.1",
