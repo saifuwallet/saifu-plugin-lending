@@ -41,7 +41,7 @@ class LendingPlugin extends Plugin implements EarnProvider {
   async getOpportunityWithdrawTransactions(
     ctx: AppContext,
     op: Opportunity,
-    amount: number
+    amount: string
   ): Promise<Transaction[]> {
     const markets = await this.ensureSolendMarkets(ctx);
 
@@ -66,7 +66,7 @@ class LendingPlugin extends Plugin implements EarnProvider {
 
     const solendAction = await SolendAction.buildWithdrawTxns(
       ctx.connection,
-      `${amount}`,
+      amount,
       reserve?.config.symbol,
       ctx.publicKey,
       'production'
@@ -83,7 +83,7 @@ class LendingPlugin extends Plugin implements EarnProvider {
   async getOpportunityDepositTransactions(
     ctx: AppContext,
     op: Opportunity,
-    amount: number
+    amount: string
   ): Promise<Transaction[]> {
     const markets = await this.ensureSolendMarkets(ctx);
 
@@ -102,7 +102,7 @@ class LendingPlugin extends Plugin implements EarnProvider {
 
     const solendAction = await SolendAction.buildDepositTxns(
       ctx.connection,
-      `${amount}`,
+      amount,
       reserve?.config.symbol,
       ctx.publicKey,
       'production'
@@ -159,7 +159,7 @@ class LendingPlugin extends Plugin implements EarnProvider {
     console.log('pk ', ctx.publicKey);
 
     if (!ctx.publicKey) {
-      return 0;
+      return '0';
     }
 
     const m =
@@ -174,10 +174,10 @@ class LendingPlugin extends Plugin implements EarnProvider {
     const foundDeposit = obligations?.deposits.find((deposit) => deposit.mintAddress === m);
 
     if (foundDeposit) {
-      return foundDeposit.amount.toNumber();
+      return foundDeposit.amount.toString();
     }
 
-    return 0;
+    return '0';
   }
 }
 
