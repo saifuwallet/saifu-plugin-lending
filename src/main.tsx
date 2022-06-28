@@ -141,6 +141,7 @@ class LendingPlugin extends Plugin implements EarnProvider, BalanceProvider {
           ? 'sol'
           : reserve.config.mintAddress,
       rate: (reserve?.totalSupplyAPY().totalAPY ?? 0) * 100 * 100,
+      detailUrl: 'https://docs.solend.fi/getting-started/supply-and-borrow-apy',
     }));
 
     return opportunities ?? [];
@@ -165,6 +166,7 @@ class LendingPlugin extends Plugin implements EarnProvider, BalanceProvider {
         title: `Solend ${reserve?.config.name}`,
         mint: mint,
         rate: (reserve?.totalSupplyAPY().totalAPY ?? 0) * 100 * 100,
+        detailUrl: 'https://docs.solend.fi/getting-started/supply-and-borrow-apy',
       },
     ];
   }
