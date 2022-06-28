@@ -1,6 +1,6 @@
 import { Transaction } from '@solana/web3.js';
 import { SolendAction, SolendMarket } from '@solendprotocol/solend-sdk';
-import { AppContext, EarnProvider, Opportunity, Plugin } from 'saifu';
+import { AppContext, BalanceProvider, BalanceType, EarnProvider, Opportunity, Plugin } from 'saifu';
 
 import SolendIcon from '@/components/SolendIcon';
 
@@ -16,7 +16,7 @@ const Solend = () => {
   );
 };
 
-class LendingPlugin extends Plugin implements EarnProvider {
+class LendingPlugin extends Plugin implements EarnProvider, BalanceProvider {
   id = 'lending';
   markets: SolendMarket | undefined;
 
@@ -38,6 +38,27 @@ class LendingPlugin extends Plugin implements EarnProvider {
     });
   }
 
+  async getBalances(ctx: AppContext) {
+    if (!ctx.publicKey) {
+      return [];
+    }
+
+    const markets = await this.ensureSolendMarkets(ctx);
+    const obligation = await markets.fetchObligationByWallet(ctx.publicKey);
+    const balances = obligation?.deposits?.map((obl) => ({
+      mint: obl.mintAddress,
+      balance: obl.amount.toString(),
+      type: BalanceType.Earn,
+    }));
+
+    return balances ?? [];
+  }
+
+  async getBalanceForMint(ctx: AppContext, mint: string) {
+    const m = mint === 'sol' ? 'So11111111111111111111111111111111111111112' : mint;
+    return (await this.getBalances(ctx)).find((balance) => balance.mint === m) ?? null;
+  }
+
   async getOpportunityWithdrawTransactions(
     ctx: AppContext,
     op: Opportunity,
@@ -54,15 +75,11 @@ class LendingPlugin extends Plugin implements EarnProvider {
     const reserve = markets.reserves.find((res) => res.config.mintAddress === m);
     reserve?.config.symbol;
 
-    console.log('found reserve', reserve);
-
     if (!reserve) {
       return [];
     }
 
     await reserve.load();
-
-    console.log('reserve loaded');
 
     const solendAction = await SolendAction.buildWithdrawTxns(
       ctx.connection,
@@ -73,7 +90,6 @@ class LendingPlugin extends Plugin implements EarnProvider {
     );
 
     const txs = await solendAction.getTransactions();
-    console.log('txs', txs);
 
     return [txs.preLendingTxn, txs.lendingTxn, txs.postLendingTxn].filter(
       (x) => !!x
@@ -156,8 +172,6 @@ class LendingPlugin extends Plugin implements EarnProvider {
   async getOpportunityBalance(ctx: AppContext, opportunity: Opportunity) {
     const markets = await this.ensureSolendMarkets(ctx);
 
-    console.log('pk ', ctx.publicKey);
-
     if (!ctx.publicKey) {
       return '0';
     }
@@ -165,12 +179,7 @@ class LendingPlugin extends Plugin implements EarnProvider {
     const m =
       opportunity.mint === 'sol' ? 'So11111111111111111111111111111111111111112' : opportunity.mint;
 
-    console.log('mint ', m);
-
     const obligations = await markets.fetchObligationByWallet(ctx.publicKey);
-
-    console.log(obligations);
-
     const foundDeposit = obligations?.deposits.find((deposit) => deposit.mintAddress === m);
 
     if (foundDeposit) {
