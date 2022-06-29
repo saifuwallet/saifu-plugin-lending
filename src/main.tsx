@@ -18,15 +18,22 @@ const Solend = () => {
 
 class LendingPlugin extends Plugin implements EarnProvider, BalanceProvider {
   id = 'lending';
-  markets: SolendMarket | undefined;
+  marketsPromise: Promise<SolendMarket> | undefined;
 
-  async ensureSolendMarkets(ctx: AppContext) {
-    if (!this.markets) {
-      this.markets = await SolendMarket.initialize(ctx.connection);
-      await this.markets.loadRewards();
+  async ensureSolendMarkets(ctx: AppContext, forceRefetch = false) {
+    if (!this.marketsPromise || forceRefetch) {
+      this.marketsPromise = new Promise(async (resolve, reject) => {
+        try {
+          const markets = await SolendMarket.initialize(ctx.connection);
+          await markets.loadRewards();
+          resolve(markets);
+        } catch (e) {
+          reject(e);
+        }
+      });
     }
 
-    return this.markets;
+    return await this.marketsPromise;
   }
 
   async onload(): Promise<void> {
@@ -172,7 +179,7 @@ class LendingPlugin extends Plugin implements EarnProvider, BalanceProvider {
   }
 
   async getOpportunityBalance(ctx: AppContext, opportunity: Opportunity) {
-    const markets = await this.ensureSolendMarkets(ctx);
+    const markets = await this.ensureSolendMarkets(ctx, true);
 
     if (!ctx.publicKey) {
       return '0';
