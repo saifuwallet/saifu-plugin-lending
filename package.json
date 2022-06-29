@@ -1,6 +1,6 @@
 {
   "name": "@saifuwallet/saifu-plugin-lending",
-  "version": "1.1.0-dev5",
+  "version": "1.1.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": "git@github.com:saifuwallet/saifu-plugin-lending.git",
@@ -48,7 +48,7 @@
     "rollup-plugin-node-polyfills": "^0.2.1",
     "rollup-plugin-polyfill-node": "^0.8.0",
     "rollup-plugin-postcss": "^4.0.2",
-    "saifu": "github:saifuwallet/saifu-api#earn-api",
+    "saifu": "^0.5.0",
     "tailwindcss": "^3.0.23",
     "tslib": "^2.0.3",
     "typescript": "^4.5.5"
