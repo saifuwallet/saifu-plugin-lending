@@ -179,7 +179,7 @@ class LendingPlugin extends Plugin implements EarnProvider, BalanceProvider {
   }
 
   async getOpportunityBalance(ctx: AppContext, opportunity: Opportunity) {
-    const markets = await this.ensureSolendMarkets(ctx, true);
+    const markets = await this.ensureSolendMarkets(ctx);
 
     if (!ctx.publicKey) {
       return '0';
